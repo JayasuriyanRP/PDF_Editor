@@ -72,20 +72,75 @@
       button:hover {
         background: #0056b3;
       }
+      .file-input-container {
+        display: inline-block;
+        position: relative;
+      }
+
+      .file-upload-button {
+        background-color: #bbd459;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+      }
+
+      .file-upload-button:hover {
+        background-color: #768639;
+      }
+
+      .file-upload-button input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .close-button {
+        background-color: #f7635e;
+      }
+
+      .close-button:hover {
+        background-color: #a74441;
+        color: #fff;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <h2>PDF Editor & Merger</h2>
-      <input
+      <div class="file-input-container">
+        <button class="file-upload-button">
+          Choose PDFs
+          <input
+            type="file"
+            id="pdfFiles"
+            multiple
+            accept="application/pdf"
+            onchange="previewPDFs()"
+          />
+        </button>
+      </div>
+
+      <!-- <input
         type="file"
         id="pdfFiles"
         multiple
         accept="application/pdf"
         onchange="previewPDFs()"
-      />
+      /> -->
       <div id="pdfPreview" class="pdf-preview"></div>
       <button onclick="editAndMergePDFs()">Edit & Merge PDFs</button>
+      <button class="close-button" onclick="clearAll()">Clear</button>
     </div>
     <div id="modal" class="modal" onclick="closeModal(event)">
       <div class="modal-content">
@@ -110,11 +165,13 @@
       async function previewPDFs() {
         const input = document.getElementById("pdfFiles");
         const previewContainer = document.getElementById("pdfPreview");
-        previewContainer.innerHTML = "";
-        pdfData = [];
 
         for (let i = 0; i < input.files.length; i++) {
           const file = input.files[i];
+
+          // Check if file is already in pdfData to prevent duplicates
+          if (pdfData.some((pdf) => pdf.file.name === file.name)) continue;
+
           const fileReader = new FileReader();
           fileReader.readAsArrayBuffer(file);
           fileReader.onload = async function () {
@@ -139,10 +196,18 @@
 
             const pdfItem = document.createElement("div");
             pdfItem.className = "pdf-item";
-            pdfItem.innerHTML = `<img src="${canvas.toDataURL()}" onclick="openModal(${i})">`;
+            pdfItem.innerHTML = `<img src="${canvas.toDataURL()}" onclick="openModal(${
+              pdfData.length - 1
+            })">`;
             previewContainer.appendChild(pdfItem);
           };
         }
+      }
+
+      function clearAll() {
+        document.getElementById("pdfFiles").value = ""; // Reset file input
+        document.getElementById("pdfPreview").innerHTML = ""; // Clear preview container
+        pdfData = []; // Reset stored PDF data
       }
 
       async function editAndMergePDFs() {
