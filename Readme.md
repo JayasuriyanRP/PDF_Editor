@@ -1,9 +1,9 @@
 # PDF Editor & Merger
 
-## Features
+## Planned Features
 
 ### 1. PDF Editing Features
-- ✅ Rotate Pages – Rotate individual pages instead of the whole document.
+- ✅ Rotate Pages – Rotate individual pages instead of the whole document. - `DONE`
 - ✅ Reorder Pages – Drag and drop to rearrange pages before merging.
 - ✅ Delete Pages – Remove unwanted pages from a PDF before merging.
 - ✅ Add Text/Annotations – Allow users to write or annotate PDFs.
@@ -13,13 +13,13 @@
 - ✅ Redact Sensitive Information – Blur or remove certain content from PDFs.
 
 ### 2. PDF Merging & Splitting Features
-- ✅ Merge PDFs – Merge multiple PDFs, allowing users to arrange file order before merging.
+- ✅ Merge PDFs – Merge multiple PDFs, allowing users to arrange file order before merging. - `DONE`
 - ✅ Split PDFs – Extract specific pages from a PDF into a new file.
 - ✅ Extract Pages – Save selected pages as a new PDF instead of merging everything.
 - ✅ Duplicate Pages – Copy and insert pages multiple times before merging.
 
 ### 3. File Management Features
-- ✅ Save Edited PDFs – Ensure that applied edits persist in the saved file.
+- ✅ Save Edited PDFs – Ensure that applied edits persist in the saved file. - `DONE`
 - ✅ Save as Different Formats – Export PDFs to PNG, JPG, or TXT.
 - ✅ Cloud Storage Integration – Save files to Google Drive, Dropbox, or OneDrive.
 - ✅ Auto Save Progress – Retain edits even if the user refreshes the page.
